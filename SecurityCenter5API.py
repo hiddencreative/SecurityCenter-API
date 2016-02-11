@@ -286,5 +286,6 @@ if __name__ == '__main__':
         Call to logout
         """
 
+
         sc.logout()
 
