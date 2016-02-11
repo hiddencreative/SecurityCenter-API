@@ -251,8 +251,8 @@ if __name__ == '__main__':
     Example sc = SecurityCenter('sc.mydomain.com')  or sc = SecurityCenter('192.168.1.1')
             sc.login('bob', 'abc123')
     """
-    sc = SecurityCenter('192.168.1.78')
-    sc.login('python', 'Iarw12gt!')
+    sc = SecurityCenter('192.168.1.1')
+    sc.login('userid', 'password')
 
     if sc.authenticated():
 
