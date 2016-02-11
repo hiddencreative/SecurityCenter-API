@@ -21,7 +21,7 @@ class SecurityCenter:
         self._verify = verify_ssl
         self._token = ''
         self._cookie = ''
-        self._log = logging.getLogger('scapy')
+        self._log = logging.getLogger('scapy.runtime')
 
     def authenticated(self):
         """
@@ -251,8 +251,8 @@ if __name__ == '__main__':
     Example sc = SecurityCenter('sc.mydomain.com')  or sc = SecurityCenter('192.168.1.1')
             sc.login('bob', 'abc123')
     """
-    sc = SecurityCenter('192.168.1.1')
-    sc.login('scusername', 'password')
+    sc = SecurityCenter('192.168.1.78')
+    sc.login('python', 'Iarw12gt!')
 
     if sc.authenticated():
 
