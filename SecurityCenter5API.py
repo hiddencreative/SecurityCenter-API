@@ -21,7 +21,7 @@ class SecurityCenter:
         self._verify = verify_ssl
         self._token = ''
         self._cookie = ''
-        self._log = logging.getLogger('scapy.runtime')
+        self._log = logging.getLogger('scapy.runtime').setLevel(logging.ERROR)
 
     def authenticated(self):
         """
@@ -216,8 +216,8 @@ class SecurityCenter:
             For additional troubleshooting, you can uncomment the following two lines of code.
             Uncommenting them will display the QUERY and INPUT strings in the output
             """
-            #print 'QUERY:\n{0}\n'.format(query)
-            #print 'INPUT:\n{0}\n'.format(input)
+            print 'QUERY:\n{0}\n'.format(query)
+            print 'INPUT:\n{0}\n'.format(input)
 
             response = self.connect('POST', 'analysis', input)
 
@@ -252,7 +252,7 @@ if __name__ == '__main__':
             sc.login('bob', 'abc123')
     """
     sc = SecurityCenter('192.168.1.1')
-    sc.login('userid', 'password')
+    sc.login('username', 'password')
 
     if sc.authenticated():
 
