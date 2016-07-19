@@ -9,6 +9,19 @@
 
 # Simply create a new def() with your requirements.
 
+"""
+name:        SecurityCenter5API.py
+description: A script for accessing Tenable's SecurityCenter 4.x.x via API
+
+license :    GPL-3.0
+             SEE LICENSE IN LICENSE.txt
+
+author :     Josef Weiss
+email :      josef -at- josefweiss.com
+url :        http://josefweiss.com
+
+"""
+
 
 import urllib2
 import urllib
