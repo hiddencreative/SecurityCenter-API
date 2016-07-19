@@ -6,6 +6,7 @@ import json
 import logging
 import sys
 import os
+import datetime
 
 
 class SecurityCenter:
@@ -21,7 +22,8 @@ class SecurityCenter:
         self._verify = verify_ssl
         self._token = ''
         self._cookie = ''
-        self._log = logging.getLogger('scapy.runtime').setLevel(logging.ERROR)
+        #self._log = logging.getLogger('scapy.runtime').setLevel(logging.ERROR)
+        self._log = logging.getLogger('scapy')
 
     def authenticated(self):
         """
@@ -95,6 +97,8 @@ class SecurityCenter:
                 r = requests.post(url, data=data, headers=headers, verify=self._verify)
             elif method == 'PUT':
                 r = requests.put(url, data=data, headers=headers, verify=self._verify)
+            elif method == 'PATCH':
+                r = requests.patch(url, data=data, headers=headers, verify=self._verify)
             elif method == 'DELETE':
                 r = requests.delete(url, data=data, headers=headers, verify=self._verify)
             else:
@@ -216,8 +220,8 @@ class SecurityCenter:
             For additional troubleshooting, you can uncomment the following two lines of code.
             Uncommenting them will display the QUERY and INPUT strings in the output
             """
-            print 'QUERY:\n{0}\n'.format(query)
-            print 'INPUT:\n{0}\n'.format(input)
+            #print 'QUERY:\n{0}\n'.format(query)
+            #print 'INPUT:\n{0}\n'.format(input)
 
             response = self.connect('POST', 'analysis', input)
 
@@ -251,26 +255,29 @@ if __name__ == '__main__':
     Example sc = SecurityCenter('sc.mydomain.com')  or sc = SecurityCenter('192.168.1.1')
             sc.login('bob', 'abc123')
     """
-    sc = SecurityCenter('192.168.1.1')
-    sc.login('username', 'password')
+    sc = SecurityCenter('SecurityCenterIP')
+    sc.login('LOGIN_NAME', 'PASSWORD')
 
     if sc.authenticated():
 
         resp = sc.connect('GET', 'query')
         # Uncomment the following line to view the entire response in the output.
-        #print resp
+        # print resp
 
         """
-        This section will conduct a vulnerability query and display the IP address and plugin name
+        This section will conduct a vulnerability query and display:
+        1. The IP address
+        2. Plugin name
+        3. Plugin ID
+        4. Solution
         for the first 10 critical vulnerabilities.  A value of 4=Critical, 3=High, 2=Medium, 1=Low
         """
         print
-        print 'First 10 Critical Vulnerabilities'
-        print '================================='
         print
         filters = [{'filterName': 'severity',
                     'operator': '=',
-                    'value': '4'}]
+                    'value': '4',
+                    }]
 
         query = {'type': 'vuln',
                  'tool': 'vulndetails',
@@ -280,6 +287,8 @@ if __name__ == '__main__':
         for v in sc.analysis(query, limit=10):
             print 'IP: ' +v['ip']
             print 'Name: ' +v['pluginName']
+            print 'Plugin ID: ' +v['pluginID']
+            print 'Solution: ' +v['solution']
             print
 
         """
