@@ -1,4 +1,16 @@
-__author__ = 'jweiss'
+
+"""
+name:        SecurityCenter5API.py
+description: A script for accessing Tenable's SecurityCenter 5.x.x via API
+
+license :    GPL-3.0
+             SEE LICENSE IN LICENSE.txt
+
+author :     Josef Weiss
+email :      josef -at- josefweiss.com
+url :        http://josefweiss.com
+
+"""
 
 
 import requests
@@ -255,8 +267,8 @@ if __name__ == '__main__':
     Example sc = SecurityCenter('sc.mydomain.com')  or sc = SecurityCenter('192.168.1.1')
             sc.login('bob', 'abc123')
     """
-    sc = SecurityCenter('SecurityCenterIP')
-    sc.login('LOGIN_NAME', 'PASSWORD')
+    sc = SecurityCenter('SecurityCenterIP_Goes_Here')
+    sc.login('loginName', 'password')
 
     if sc.authenticated():
 
